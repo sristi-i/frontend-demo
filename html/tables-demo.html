@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!-- DOCTYPE html = HTML5 declaration - short vs old verbose doctypes -->
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- These meta tags are HTML5 - older HTML had no viewport concept -->
+     <title> Day 1 - HTML vs HTML5, Tables</title>
+</head>
+<body>
+    <h1>Day 1 - HTML Concepts</h1>
+
+    <!-- HTML5 SEMANTIC TAGS -->
+    <!-- These tags did not exist in old HTML - HTML5 added them -->
+     <!-- They look like divs but carry meaning for browsers/crawlers -->
+    <header>
+    <nav>Site navigation goes here</nav>
+    </header>
+
+    <main>
+        <section>
+            <article>
+                <h2>HTML5 semantic structure</h2>
+                <p>header, main, section, article, footer - HTML5 additions</p>
+            </article>
+        </section>
+    </main>
+
+    <footer>Footer contetn here</footer>
+
+
+    <!-- th vs td -->
+    <!-- th = bold + centerd by default, semantic header meaning -->
+    <!-- td = plain data cell, no special default styling -->
+    <h2>th vs td</h2>
+    <table border="1" cellpadding-"8" cellspacing="0">
+        <tr>
+            <th>Name</th>
+            <th>Subject</th>
+            <th>Marks</th>
+        </tr>
+        <tr>
+            <td>Alice</td>
+            <td>Math</td>
+            <td>92</td>
+        </tr>
+        <tr>
+            <td>Bob</td>
+            <td>Science</td>
+            <td>85</td>
+        </tr>
+    </table>
+
+    <!-- cellspacing vs cellpadding -->
+    <!-- cellpadding = space INSIDE cell (betweeen border and content)-->
+    <!-- cellspacing = space BETWEEN cells (outside cell boarders) -->
+    
+    <h2>cellpadding=20, cellspacing=0</h2>
+    <table border="1" cellpadding="20" cellspacing="0">
+        <tr><th>Name</th><th>Score</th></tr>
+        <tr><td>Alice</td><td>92</td></tr>
+    </table>
+
+    <br />
+
+    <h2>cellpadding=0, cellspacing=20</h2>
+    <table border="1" cellpadding="0" cellspacing="20">
+        <tr><th>Name</th><th>Score</th></tr>
+        <tr><td>Alice</td><td>92</td></tr>
+    </table>
+
+    <br />
+
+    <h2>cellpadding=10, cellspacing=10 (both set)</h2>
+    <table boarder="1" cellpadding="10" cellspacing="10">
+        <tr><th>Name</th><th>Score</th></tr>
+        <tr><td>Alice</td><td>92</td></tr>
+    </table>
+
+    <!-- colspan vs rowspan -->
+    <!-- colspan=N: cell spans N columns horizontally -->
+    <!-- rowspan=N: cell spans N rows vertically -->
+    <h2>colspan and rowspan</h2>
+    <table boarder="1" cellpadding="8" cellspacing="0">
+        <tr>
+            <!-- spans all 3 columns -->
+            <th colspan="3">Exam Results</th>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <th>Subject</th>
+            <th>Score</th>
+        </tr>
+        <tr>
+            <!-- Alice spans 2 rows - no Name td in next row -->
+            <td rowspan="2">Alice</td>
+            <td>Math</td>
+            <td>95</td>
+        </tr>
+        <tr>
+            <!-- Name column skipped - rowspan above fills it -->
+            <td>Science</td>
+            <td>88</td>
+        </tr>
+        <tr>
+            <td>Bob</td>
+            <td>Math</td>
+            <td>76</td>
+        </tr>
+    </table>
+    
+</body>
+</html>
