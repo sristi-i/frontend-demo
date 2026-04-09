@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Day 2 - CSS Types, Selectors, Models</title>
+
+  <style>
+  /* RESET using universal selector + border-box */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.5;
+    }
+
+    h2{
+      color: darkblue;
+      margin: 30px 0 10px;
+      border-bottom: 2px solid darkblue;
+      padding-bottom: 4px;
+    }
+
+     h3 {
+      margin: 16px 0 8px;
+      color: #333;
+    }
+
+    /* Section 2 - Selectors */
+
+    /* element selector */
+    p {font-size: 14px;}
+
+    /* class selector - reusable */
+    .highlight {background: lightyellow; padding: 4px 8px;}
+
+    /* id selector - unique */
+    #unique {background: lightcoral; padding: 4px 8px; font-weight: bold;}
+
+    /* attribute selector */
+    input[type="text"] {border: 2px solid green; padding: 4px; margin: 4px;}
+    input[type="password"] {border: 2px solid red; padding: 4px; margin: 4px;}
+
+    /* pseudo-class */
+    a:hover {color: red;}
+    li:first-child {color: green;}
+    li:last-child {color: orange;}
+
+    /* pseudo-element */
+    .intro::before {content: ">> "; color: gray;}
+    .intro::first-line {font-weight: bold;}
+
+    /* combinators */
+    #combo-demo p {color: purple;} /* descendant */
+    #combo-demo > p {text-decoration: underline;} /* direct child */
+    .sibling-h + p {background: #eef; padding: 4px;} /* adjacent */
+    .sibling-h ~p {border-left: 3px solid #aaf; padding-left: 8px; margin: 4px;} /* general */
+
+    /* Section 3 - Models */
+    /* Box model */
+    .content-box {
+      box-sizing: content-box;  /* DEFAULT: width = content only */
+      width: 200px;
+      padding: 20px;
+      border: 5px solid steelblue;
+      margin: 10px 0;
+      background: lightblue;
+      /* total actual width = 200 + 40 + 10 = 250px */
+    }
+
+    .border-box {
+      box-sizing: border-box;   /* width includes padding + border */
+      width: 200px;
+      padding: 20px;
+      border: 5px solid tomato;
+      margin: 10px 0;
+      background: lightsalmon;
+      /* total actual width = 200px exactly */
+    }
+
+    /* Display model */
+    .demo-block {
+      display: block;       /* full width, new line */
+      background: #d0e8ff;
+      padding: 8px;
+      margin: 4px 0;
+    }
+
+    .demo-inline {
+      display: inline;      /* sits in line, no width/height effect */
+      background: #ffe0d0;
+      padding: 4px;
+    }
+
+    .demo-inline-block {
+      display: inline-block; /* inline BUT accepts width/height */
+      background: #d0ffd0;
+      padding: 8px;
+      width: 120px;
+      margin: 4px;
+    }
+
+    /* Flexbox model */
+    .flex-container {
+      display: flex;
+      flex-direction: row;         /* main axis: horizontal */
+      justify-content: space-between; /* spread items along main axis */
+      align-items: center;         /* center on cross axis */
+      gap: 10px;
+      background: #f0f0f0;
+      padding: 10px;
+      border: 2px solid #999;
+    }
+
+    .flex-item {
+      background: steelblue;
+      color: white;
+      padding: 16px 20px;
+      border-radius: 4px;
+    }
+
+    .flex-column {
+      display: flex;
+      flex-direction: column;      /* stack items vertically */
+      gap: 8px;
+      background: #f8f0ff;
+      padding: 10px;
+      border: 2px solid #aa88cc;
+      width: 160px;
+      margin-top: 10px;
+    }
+
+    .flex-column .flex-item {
+      background: mediumpurple;
+      padding: 10px;
+    }
+
+    /* Grid model */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+      gap: 10px;
+      background: #f5f5e0;
+      padding: 10px;
+      border: 2px solid #aaaa44;
+    }
+
+    .grid-item {
+      background: goldenrod;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    /* Position model */
+    .position-wrapper {
+      position: relative;    /* needed so absolute child anchors to this */
+      background: #eee;
+      height: 160px;
+      border: 2px solid #999;
+      margin: 10px 0;
+    }
+
+    .pos-static {
+      position: static;      /* default — no offset properties work */
+      background: #ccc;
+      padding: 6px;
+    }
+
+    .pos-relative {
+      position: relative;
+      top: 10px;             /* nudged 10px down from its normal spot */
+      left: 20px;            /* nudged 20px right */
+      background: lightgreen;
+      padding: 6px;
+      width: 160px;
+    }
+
+    .pos-absolute {
+      position: absolute;
+      top: 10px;             /* 10px from top of nearest positioned parent */
+      right: 10px;           /* 10px from right of nearest positioned parent */
+      background: coral;
+      padding: 6px;
+      width: 140px;
+    }
+
+    .pos-fixed {
+      /* position: fixed would stick to viewport — skipping to avoid overlap */
+      background: #ffd700;
+      padding: 6px;
+      width: 180px;
+      border: 2px dashed #888;
+    }
+
+    /* Float model */
+    .float-box {
+      float: left;           /* box floats left, text wraps around it */
+      width: 100px;
+      height: 80px;
+      background: lightseagreen;
+      color: white;
+      margin: 0 12px 8px 0;
+      padding: 8px;
+    }
+
+    .clearfix {
+      clear: both;           /* stops next element from wrapping around float */
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Day 2 — CSS</h1>
+
+
+  <!-- ── 1. TYPES OF CSS ──────────────────────────────────────────── -->
+  <h2>1. Types of CSS</h2>
+
+  <!-- INLINE — highest priority -->
+  <p style="color: red; font-weight: bold;">
+    Inline CSS — style written directly on this element
+  </p>
+
+  <!-- INTERNAL — from the style block above -->
+  <p class="highlight">
+    Internal CSS — this class is defined in the style block in head
+  </p>
+
+  <!-- EXTERNAL — would come from a linked .css file -->
+  <p>External CSS — in a real project this page would link style.css in head</p>
+
+
+  <!-- ── 2. SELECTORS ────────────────────────────────────────────── -->
+  <h2>2. Selectors</h2>
+
+  <p class="highlight">Class selector — .highlight (reusable)</p>
+  <p id="unique">ID selector — #unique (only one per page)</p>
+
+  <input type="text" placeholder="input[type=text] — green border" />
+  <input type="password" placeholder="input[type=password] — red border" />
+
+  <br /><br />
+  <a href="#">Hover me — a:hover turns red</a>
+
+  <ul style="margin: 10px 0 10px 20px;">
+    <li>First — li:first-child (green)</li>
+    <li>Middle</li>
+    <li>Last — li:last-child (orange)</li>
+  </ul>
+
+  <p class="intro">
+    Pseudo-element demo — before inserts >> and first-line is bold.
+    This second line is normal weight showing first-line only targets line one.
+  </p>
+
+  <h3>Combinators</h3>
+  <div id="combo-demo">
+    <p>Direct child p — underlined + purple</p>
+    <div><p>Nested p — purple only (descendant), not underlined</p></div>
+  </div>
+
+  <p class="sibling-h">Sibling heading</p>
+  <p>Adjacent sibling — h + p (blue bg)</p>
+  <p>General sibling — h ~ p (left border)</p>
+  <p>General sibling — h ~ p (left border)</p>
+
+
+  <!-- ── 3. BOX MODEL ─────────────────────────────────────────────── -->
+  <h2>3. Box Model</h2>
+
+  <div class="content-box">
+    content-box (default) — width=200px BUT total = 250px<br />
+    (padding 40px + border 10px added on top)
+  </div>
+
+  <div class="border-box">
+    border-box (best practice) — width=200px AND total = 200px<br />
+    (padding + border fit INSIDE the 200px)
+  </div>
+
+
+  <!-- ── 4. DISPLAY MODEL ─────────────────────────────────────────── -->
+  <h2>4. Display Model</h2>
+
+  <div class="demo-block">display: block — takes full width, new line</div>
+  <div class="demo-block">display: block — always starts on its own line</div>
+
+  <br />
+  <span class="demo-inline">inline</span>
+  <span class="demo-inline">inline</span>
+  <span class="demo-inline">inline — sits in the same line, no width/height</span>
+
+  <br /><br />
+  <span class="demo-inline-block">inline-block 120px</span>
+  <span class="demo-inline-block">inline-block 120px</span>
+  <span class="demo-inline-block">sits inline + accepts width</span>
+
+
+  <!-- ── 5. FLEXBOX MODEL ─────────────────────────────────────────── -->
+  <h2>5. Flexbox Model (1D — row or column)</h2>
+
+  <h3>flex-direction: row + justify-content: space-between</h3>
+  <div class="flex-container">
+    <div class="flex-item">Item 1</div>
+    <div class="flex-item">Item 2</div>
+    <div class="flex-item">Item 3</div>
+  </div>
+
+  <h3>flex-direction: column</h3>
+  <div class="flex-column">
+    <div class="flex-item">Item A</div>
+    <div class="flex-item">Item B</div>
+    <div class="flex-item">Item C</div>
+  </div>
+
+
+  <!-- ── 6. GRID MODEL ────────────────────────────────────────────── -->
+  <h2>6. Grid Model (2D — rows AND columns)</h2>
+
+  <div class="grid-container">
+    <div class="grid-item">1</div>
+    <div class="grid-item">2</div>
+    <div class="grid-item">3</div>
+    <div class="grid-item">4</div>
+    <div class="grid-item">5</div>
+    <div class="grid-item">6</div>
+  </div>
+
+
+  <!-- ── 7. POSITION MODEL ────────────────────────────────────────── -->
+  <h2>7. Position Model</h2>
+
+  <div class="position-wrapper">
+    <p class="pos-static">static — default flow, offsets have no effect</p>
+    <p class="pos-relative">relative — nudged 10px down, 20px right from normal spot</p>
+    <p class="pos-absolute">absolute — 10px from top-right of parent</p>
+  </div>
+
+  <p class="pos-fixed">
+    fixed would stick to screen on scroll — shown here as static to avoid overlap
+  </p>
+
+
+  <!-- ── 8. FLOAT MODEL ───────────────────────────────────────────── -->
+  <h2>8. Float Model</h2>
+
+  <div class="float-box">float: left</div>
+  <p>
+    This text wraps around the floated box on the right side.
+    Float moves the element to one side and text flows around it.
+    This was the main layout method before flexbox and grid existed.
+  </p>
+  <div class="clearfix"></div>
+  <p>clear: both — this paragraph starts below the float</p>
+
+</body>
+</html>
